@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>FWI Prediction</title>
+    <style>
+        body {
+            background-color: #f1f1f1;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        
+        .login {
+            background-color: #fff;
+            border-radius: 5px;
+            max-width: 400px;
+            margin-bottom: 20px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .login h1 {
+            text-align: center;
+        }
+        
+        .login input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        
+        .login button[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .login h2 {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .prediction {
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .prediction h2 {
+            text-align: center;
+        }
+        
+        .image-container {
+            text-align: center;
+        }
+        
+        .image-container img {
+            max-width: 300px;
+            max-height: 300px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="image-container">
+            <img src="https://i0.wp.com/objectstore.e2enetworks.net/content-edupristine-com/Blog/Why-do-we-Need-PBA/why-do-we-need-predictive-Analytics-1.jpg?zoom=1.25&w=525&ssl=1" alt="Image Description">
+        </div>
+        
+        <div class="login">
+            <h1>FWI Prediction</h1>
+            <p>This is a prediction model on regression analysis and is created by <span style="color: #ff0000; font-weight: bold;">Ritesh Singh</span></p>
+
+            <!-- Main Input For Receiving Query to our ML -->
+            <form action="{{ url_for('predict_datapoint')}}" method="post">
+                <input type="text" name="Temperature" placeholder="Temperature" required="required" /><br>
+                <input type="text" name="RH" placeholder="RH" required="required" /><br>
+                <input type="text" name="WS" placeholder="WS" required="required" /><br>
+                <input type="text" name="Rain" placeholder="Rain" required="required" /><br>
+                <input type="text" name="FFMC" placeholder="FFMC" required="required" /><br>
+                <input type="text" name="DMC" placeholder="DMC" required="required" /><br>
+                <input type="text" name="ISI" placeholder="ISI" required="required" /><br>
+                <input type="text" name="Classes" placeholder="Classes (0 for not fire, 1 for fire)" required="required" /><br>
+                <input type="text" name="Region" placeholder="Region (0 or 1)" required="required" /><br>
+                <button type="submit">Predict</button>
+            </form>
+        </div>
+
+        {% if result is not none %}
+            <div class="prediction">
+                <h2>FWI Prediction</h2>
+                <p>The predicted FWI value is: <strong>{{ result }}</strong></p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+
+</html>
